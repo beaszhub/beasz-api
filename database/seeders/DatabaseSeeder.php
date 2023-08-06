@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +13,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call('UsersTableSeeder');
+        switch (config('app.env')) 
+        {
+            case 'production': {
+                $this->productionSeeder();
+                break;
+            }
+            default: {
+                $this->developmentSeeder();
+                break;
+            }
+        }
+    }
+
+    public function productionSeeder() 
+    {
+        $this->call(RoleSeeder::class);
+    }
+
+    public function developmentSeeder() 
+    {
+        $this->call(RoleSeeder::class);
     }
 }
