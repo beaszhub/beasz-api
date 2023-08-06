@@ -13,8 +13,13 @@ return [
     |
     */
 
+    // 'defaults' => [
+    //     'guard' => env('AUTH_GUARD', 'api'),
+    // ],
+
     'defaults' => [
-        'guard' => env('AUTH_GUARD', 'api'),
+        'guard' => 'api',
+        'passwords' => 'users',
     ],
 
     /*
@@ -34,8 +39,15 @@ return [
     |
     */
 
+    // 'guards' => [
+    //     'api' => ['driver' => 'api'],
+    // ],
+
     'guards' => [
-        'api' => ['driver' => 'api'],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -54,9 +66,12 @@ return [
     | Supported: "database", "eloquent"
     |
     */
-
+    
     'providers' => [
-        //
+        'users' => [
+            'driver' => 'eloquent',
+            'model'  => \App\Models\User::class,
+        ],
     ],
 
     /*
@@ -79,7 +94,14 @@ return [
     */
 
     'passwords' => [
-        //
-    ],
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+      ],
+      
+    'password_timeout' => 10800,
 
 ];

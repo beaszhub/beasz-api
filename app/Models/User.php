@@ -8,12 +8,13 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 use App\Traits\HasUuid;
 use App\Enums\Gender;
 use App\Enums\Status;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class User extends Model implements JWTSubject, AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable, HasFactory;
     use HasUuid;
@@ -23,9 +24,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         'id_no',
         'passport_no',
         'email',
-        'email_verified_at',
         'phone',
-        'phone_verified_at',
         'dob',
         'gender',
         'status',
@@ -36,6 +35,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'phone_verified_at' => 'datetime',
     ];
 
     public function role()
@@ -53,4 +57,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return Status::getKey($this->status);
     }
 
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
