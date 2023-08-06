@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  beasz-api:
+    image: server-beasz:v1.0
+    container_name: beasz-api
+    restart: always
+    # env_file:
+    #   - .env
+    volumes:
+      - "${BEASZAPI_PATH}:/var/www"
+    entrypoint:
+      - sh
+      - -c
+      - |
+        set -e
+
+        composer install --verbose --prefer-dist --no-progress --no-interaction --no-suggest --optimize-autoloader
+        /docker-entrypoint.sh
+    ports:
+      - "${BEASZAPI_PORT}:8200"
+    expose:
+      - "9000"
+      - "8000"
+    working_dir: /var/www
+    networks:
+      - alqausar-net
+
+networks:
+  alqausar-net:
+    external: true
