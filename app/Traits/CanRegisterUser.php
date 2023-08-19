@@ -15,21 +15,27 @@ trait CanRegisterUser
 {
     function registerUser(Request $request): User
     {
-        $name = $request->input('name');
-        $email = $request->input('email');
-        $phone = $request->input('phone');
-        $role = Role::where('type', RoleType::customer)->first();
-        
-        $user = User::create([
-            'name' => $name,
-            'email' => $email,
-            'phone' => $phone,
-            'phone_verified_at' => $request->input('register_type') == RegisterType::phone ? Carbon::now() : null,
-            'status' => Status::active,
-            'password' => Str::random(60),
-            'role_id' => $role->id
-        ]);
+        $register_type = $request->input('register_type');
 
-        return $user;
+        if ($register_type == RegisterType::phone) {
+
+            $name = $request->input('name');
+            $email = $request->input('email');
+            $phone = $request->input('phone');
+            $role = Role::where('type', RoleType::customer)->first();
+
+            $user = User::create([
+                'name' => $name,
+                'email' => $email,
+                'phone' => $phone,
+                'phone_verified_at' => Carbon::now(),
+                'register_type' => RegisterType::phone,
+                'status' => Status::active,
+                'password' => Str::random(60),
+                'role_id' => $role->id
+            ]);
+
+            return $user;
+        }
     }
 }

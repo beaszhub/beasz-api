@@ -20,13 +20,16 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     use HasUuid;
 
     protected $fillable = [
-        'name', 
+        'name',
         'id_no',
         'passport_no',
         'email',
+        'email_verified_at',
         'phone',
+        'phone_verified_at',
         'dob',
         'gender',
+        'register_type',
         'status',
         'password',
         'role_id',
@@ -35,11 +38,6 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
     protected $hidden = [
         'password',
         'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'phone_verified_at' => 'datetime',
     ];
 
     public function role()
