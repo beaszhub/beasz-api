@@ -27,12 +27,18 @@ class DatabaseSeeder extends Seeder
     }
 
     public function productionSeeder() 
-    {
+    {   
         $this->call(RoleSeeder::class);
+        $this->call(CountrySeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(ProductSeeder::class);
     }
 
     public function developmentSeeder() 
     {
         $this->call(RoleSeeder::class);
+        $this->call(CountrySeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(ProductSeeder::class);
     }
 }

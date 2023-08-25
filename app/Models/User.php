@@ -33,12 +33,38 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         'status',
         'password',
         'role_id',
+        'country_id',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    public function isRoles($roleNames)
+    {
+        $roles = Role::whereIn('name', $roleNames)->get();
+
+        foreach ($roles as $role)
+        {
+            if ($this->role_id == $role->id)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function store()
+    {
+        return $this->hasOne(Store::class);
+    }
 
     public function role()
     {

@@ -32,11 +32,13 @@ return new class extends Migration
             $table->integer('status')->default(Status::inactive);
             $table->string('password');
             $table->rememberToken();
-            $table->foreignUuId('role_id');
+            $table->foreignUuId('role_id')->constrained();
+            $table->foreignUuId('country_id')->constrained();
             $table->timestamps();
 
             $table->index([
                 'role_id',
+                'country_id'
             ]);
         });
     }
