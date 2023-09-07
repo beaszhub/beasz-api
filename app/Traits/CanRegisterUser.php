@@ -39,6 +39,11 @@ trait CanRegisterUser
                 'country_id' => $country->id
             ]);
 
+            $user->deposits()->create([
+                'user_id' => $user->id,
+                'currency_id' => $country->currency_id,
+            ]);
+
             return $user;
         }
     }

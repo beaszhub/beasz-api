@@ -87,5 +87,6 @@
   "warning unauthorized model": "Maaf, anda tidak dibenarkan :action :attribute ini.",
   "warning unauthorized role": "Akses tidak dibenarkan.",
   "warning unauthorized unverified": "Akses tidak dibenarkan, :attribute belum disahkan.",
-  "promotion": "Promosi"
+  "promotion": "Promosi",
+  "deposit": "Deposit"
 }

@@ -31,4 +31,14 @@ class Currency extends Model
     {
         return $this->hasMany(Price::class);
     }
+
+    public function deposits()
+    {
+        return $this->hasMany(Deposit::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

@@ -66,6 +66,16 @@ class User extends Model implements JWTSubject, AuthenticatableContract, Authori
         return $this->hasOne(Store::class);
     }
 
+    public function deposits()
+    {
+        return $this->hasMany(Deposit::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Deposit::class);
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

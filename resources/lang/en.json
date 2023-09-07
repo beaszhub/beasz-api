@@ -87,5 +87,6 @@
   "warning unauthorized model": "Sorry, you are unauthorized to :action this :attribute.",
   "warning unauthorized role": "Unauthorized role.",
   "warning unauthorized unverified": "Unauthorized, :attribute is unverified.",
-  "promotion": "Promotion"
+  "promotion": "Promotion",
+  "deposit": "Deposit"
 }

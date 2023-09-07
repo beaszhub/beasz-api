@@ -3,8 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Currency;
-use App\Models\Product;
 use App\Enums\ProductType;
 use App\Enums\Status;
 use App\Models\User;
